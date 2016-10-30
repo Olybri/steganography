@@ -24,21 +24,22 @@ public class MainChocolate {
     public static void testRevealText(int[][] coverWithEmbedding) {
         //Helper.show(coverWithEmbedding, "Cover with a secret hidden text");
         String decode = Steganography.revealText(coverWithEmbedding);
-        /*for(int i=0; i<decode.length(); i+=10)
+
+        for(int i=0; i<decode.length(); i+=10)
         {
-            for (int j = 0; j < 10; ++j)
+            for(int j = 0; j < Math.min(10, decode.length()-i); ++j)
                 System.out.print(hex(decode.charAt(i+j)) + " ");
 
             System.out.print(" | ");
 
-            for (int j = 0; j < 10; ++j)
+            for(int j = 0; j < Math.min(10, decode.length()-i); ++j)
                 System.out.print(decode.charAt(i+j));
 
             System.out.println();
-        }*/
+        }
 
-        for(char c : decode.toCharArray())
-            System.out.print(c == '\r' ? "" : c);
+        /*for(char c : decode.toCharArray())
+            System.out.print(c == '\r' ? "" : c);*/
 
         //System.out.println("Secret Message:  " + decode);
     }

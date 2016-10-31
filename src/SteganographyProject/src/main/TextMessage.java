@@ -53,8 +53,7 @@ public class TextMessage
         for(int i=0; i<size; ++i)
         {
             boolean[] charBitArray = intToBitArray(message.charAt(i), sizeOfChar);
-            for(int j = 0; j < sizeOfChar; ++j)
-                bitArray[i*sizeOfChar + j] = charBitArray[j];
+            System.arraycopy(charBitArray, 0, bitArray, i * sizeOfChar, sizeOfChar);
         }
 
         return bitArray;
@@ -68,13 +67,12 @@ public class TextMessage
      */
     public static String bitArrayToString(boolean[] bitArray)
     {
-        String message = new String();
+        String message = "";
 
-        for(int i=0; i<bitArray.length/sizeOfChar; ++i)
+        for(int i = 0; i < (bitArray.length / sizeOfChar); ++i)
         {
             boolean[] charBitArray = new boolean[sizeOfChar];
-            for(int j=0; j<sizeOfChar; ++j)
-                charBitArray[j] = bitArray[i*sizeOfChar + j];
+            System.arraycopy(bitArray, i * sizeOfChar, charBitArray, 0, sizeOfChar);
 
             message += (char)bitArrayToInt(charBitArray);
         }

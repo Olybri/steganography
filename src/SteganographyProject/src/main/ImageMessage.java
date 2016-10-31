@@ -1,7 +1,5 @@
 package SteganographyProject.src.main;
-/**
- * @author
- */
+
 public final class ImageMessage
 {
     public static final int sizeOfInt = 32;
@@ -77,7 +75,11 @@ public final class ImageMessage
         return gray > threshold;
     }
 
-    public static int clampColor(int value)
+    /**
+     * @param value any integer
+     * @return the value clamped between 0 and 255
+     */
+    private static int clampColor(int value)
     {
         value = (value > 0xFF ? 0xFF : value);
         value = (value < 0 ? 0 : value);

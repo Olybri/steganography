@@ -2,8 +2,6 @@ package SteganographyProject.src.main;
 
 public final class ImageMessage
 {
-    public static final int sizeOfInt = 32;
-
     /*
      * ********************************************
      * Part 1a: prepare image message (RGB image <-> BW image)
@@ -224,16 +222,16 @@ public final class ImageMessage
         int height = bwImage.length;
         int width = bwImage[0].length;
 
-        boolean[] array = new boolean[width*height + 2*sizeOfInt];
+        boolean[] array = new boolean[width*height + 2*Integer.SIZE];
 
-        for(int i=0; i<sizeOfInt; ++i)
+        for(int i=0; i<Integer.SIZE; ++i)
             array[i] = ((height >> i) & 1) == 1;
-        for(int i=0; i<sizeOfInt; ++i)
-            array[i+sizeOfInt] = ((width >> i) & 1) == 1;
+        for(int i=0; i<Integer.SIZE; ++i)
+            array[i+Integer.SIZE] = ((width >> i) & 1) == 1;
 
         for(int y=0; y<height; ++y)
             for(int x=0; x<width; ++x)
-                array[y*width + x + 2*sizeOfInt] = bwImage[y][x];
+                array[y*width + x + 2*Integer.SIZE] = bwImage[y][x];
 
         return array;
     }
@@ -247,17 +245,17 @@ public final class ImageMessage
     public static boolean[][] bitArrayToImage(boolean[] bitArray)
     {
         int height = 0;
-        for(int i=0; i<sizeOfInt; ++i)
-            height = (height << 1) + (bitArray[sizeOfInt-1-i] ? 1 : 0);
+        for(int i=0; i<Integer.SIZE; ++i)
+            height = (height << 1) + (bitArray[Integer.SIZE-1-i] ? 1 : 0);
         int width = 0;
-        for(int i=0; i<sizeOfInt; ++i)
-            width = (width << 1) + (bitArray[2*sizeOfInt-1-i] ? 1 : 0);
+        for(int i=0; i<Integer.SIZE; ++i)
+            width = (width << 1) + (bitArray[2*Integer.SIZE-1-i] ? 1 : 0);
 
         boolean[][] image = new boolean[height][width];
 
         for(int y=0; y<height; ++y)
             for(int x=0; x<width; ++x)
-                image[y][x] = bitArray[y*width + x + 2*sizeOfInt];
+                image[y][x] = bitArray[y*width + x + 2*Integer.SIZE];
 
         return image;
     }

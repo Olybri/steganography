@@ -233,7 +233,7 @@ public class Steganography
         int height = hidden.length;
         int width = hidden[0].length;
 
-        boolean[] array = new boolean[height*width + 2*ImageMessage.sizeOfInt];
+        boolean[] array = new boolean[height*width + 2*Integer.SIZE];
         int index = 0;
 
         for(int i=0; i<Math.min(height, width)/2-1; ++i)

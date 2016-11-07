@@ -2,8 +2,6 @@ package SteganographyProject.src.main;
 
 public class TextMessage
 {
-    public static final int sizeOfChar = 16;
-
     /*
      * ********************************************
      * Part 2a: prepare text message (text <-> bit array)
@@ -48,12 +46,12 @@ public class TextMessage
     public static boolean[] stringToBitArray(String message)
     {
         int size = message.length();
-        boolean[] bitArray = new boolean[sizeOfChar * size];
+        boolean[] bitArray = new boolean[Character.SIZE * size];
 
         for(int i=0; i<size; ++i)
         {
-            boolean[] charBitArray = intToBitArray(message.charAt(i), sizeOfChar);
-            System.arraycopy(charBitArray, 0, bitArray, i * sizeOfChar, sizeOfChar);
+            boolean[] charBitArray = intToBitArray(message.charAt(i), Character.SIZE);
+            System.arraycopy(charBitArray, 0, bitArray, i * Character.SIZE, Character.SIZE);
         }
 
         return bitArray;
@@ -69,10 +67,10 @@ public class TextMessage
     {
         String message = "";
 
-        for(int i = 0; i < (bitArray.length / sizeOfChar); ++i)
+        for(int i = 0; i < (bitArray.length / Character.SIZE); ++i)
         {
-            boolean[] charBitArray = new boolean[sizeOfChar];
-            System.arraycopy(bitArray, i * sizeOfChar, charBitArray, 0, sizeOfChar);
+            boolean[] charBitArray = new boolean[Character.SIZE];
+            System.arraycopy(bitArray, i * Character.SIZE, charBitArray, 0, Character.SIZE);
 
             message += (char)bitArrayToInt(charBitArray);
         }

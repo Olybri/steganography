@@ -1,4 +1,4 @@
-package SteganographyProject.src.main;
+package main;
 
 public final class ImageMessage
 {

@@ -1,4 +1,4 @@
-package SteganographyProject.src.test;
+package test;
 
 import static org.junit.Assert.*;
 
@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
-import SteganographyProject.src.main.ImageMessage;
+import main.ImageMessage;
 
 public class ImageMessageTests {
 

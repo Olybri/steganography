@@ -1,4 +1,4 @@
-package SteganographyProject.src.main;
+package main;
 public class SignatureChecks {
 
     // Check if the signatures of all required functions are correct

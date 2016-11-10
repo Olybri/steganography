@@ -1,5 +1,5 @@
 
-package SteganographyProject.src.main;
+package main;
 
 /**
  * @author

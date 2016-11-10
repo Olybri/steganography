@@ -1,4 +1,4 @@
-package SteganographyProject.src.main;
+package main;
 
 public class MainSpiral {
 
@@ -8,17 +8,19 @@ public class MainSpiral {
 
         // first test case
 
-        String coverName = "ThePersistenceOfMemory-hidden";
-
-        // A cover with a spiral-encoded  hidden image
-        int [][] coverWithSecret =  Helper.read("images/ThePersistenceOfMemory/" + coverName + ".png");
-
-        testRevealImageInSpiral(coverWithSecret);
+//        String coverName = "ThePersistenceOfMemory-hidden";
+//
+//        // A cover with a spiral-encoded  hidden image
+//        int [][] coverWithSecret =  Helper.read("images/ThePersistenceOfMemory/" + coverName + ".png");
+//
+//        testRevealImageInSpiral(coverWithSecret);
 
         String name = "tiles-large";
-        int[][]cover = Helper.read("images/" + name + ".png");
+        int[][]cover = Helper.read("/home/loris/Pictures/pp3.png");
+//        int[][]cover = Helper.read("images/" + name + ".png");
 
-        int[][]message = Helper.read("images/mickey-mouse.png");
+        int[][]message = Helper.read("/home/loris/Pictures/pp2.png");
+//        int[][]message = Helper.read("images/mickey-mouse.png");
 
         testHideSpiral(cover, message);
 
@@ -36,7 +38,7 @@ public class MainSpiral {
     public static void testHideSpiral(int[][] cover, int[][] message) {
 
         int[][] gray = ImageMessage.toGray(message);
-        boolean[][] bw = ImageMessage.toBW(gray, 240);
+        boolean[][] bw = ImageMessage.toBW(gray, 64);
 
         int[][] hidden = Steganography.embedSpiralImage(cover, bw);
         Helper.show(hidden, "Cover with Spiral-encoded hidden Message");

@@ -197,27 +197,35 @@ public class Steganography
 
         int index = 0;
 
-        for(int i=0; i<Math.min(height, width)/2-1; ++i)
+        for(int i=0; i<Math.max(Math.min(height, width)/2, 1); ++i)
         {
             for(int x=i; x<width-i; ++x)
                 embedded[i][x] = index < message.length ?
                     embedInLSB(cover[i][x], message[index++]) :
                     cover[i][x];
+    
+            System.out.println("1. " + index);
 
             for(int y=i+1; y<height-i; ++y)
                 embedded[y][width-i - 1] = index < message.length ?
                     embedInLSB(cover[y][width-i - 1], message[index++]) :
                     cover[y][width-i - 1];
+    
+            System.out.println("2. " + index);
 
             for(int x=width-i-2; x>=i; --x)
                 embedded[height-i-1][x] = index < message.length ?
                     embedInLSB(cover[height-i-1][x], message[index++]) :
                     cover[height-i-1][x];
+            
+            System.out.println("3. " + index);
 
             for(int y=height-i-2; y>=i+1; --y)
                 embedded[y][i] = index < message.length ?
                     embedInLSB(cover[y][i], message[index++]) :
                     cover[y][i];
+            
+            System.out.println("4. " + index);
         }
 
         return embedded;
@@ -236,7 +244,7 @@ public class Steganography
         boolean[] array = new boolean[height*width + 2*Integer.SIZE];
         int index = 0;
 
-        for(int i=0; i<Math.min(height, width)/2-1; ++i)
+        for(int i=0; i<Math.max(Math.min(height, width)/2, 1); ++i)
         {
             for(int x=i; x<width-i; ++x)
                 array[index++] = getLSB(hidden[i][x]);

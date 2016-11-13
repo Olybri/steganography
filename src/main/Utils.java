@@ -20,7 +20,7 @@ public class Utils {
         int coverHeight = cover.length;
         int coverWidth = cover[0].length;
 
-        return (coverWidth * coverHeight > message.length);
+        return (coverWidth * coverHeight >= message.length);
     }
 
       /**

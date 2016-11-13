@@ -251,8 +251,6 @@ public final class ImageMessage
         for(int i=0; i<Integer.SIZE; ++i)
             width = (width << 1) + (bitArray[2*Integer.SIZE-1-i] ? 1 : 0);
     
-        System.out.println(width + "x" + height);
-
         boolean[][] image = new boolean[height][width];
 
         for(int y=0; y<height; ++y)

@@ -188,44 +188,32 @@ public class Steganography
      */
     public static int[][] embedSpiralBitArray(int[][] cover, boolean[] message)
     {
-		assert(Utils.isCoverLargeEnough(cover, message)); // example of how to use assertions
+        assert Utils.isCoverLargeEnough(cover, message) : "Message is too big for cover";
 
         int height = cover.length;
         int width = cover[0].length;
 
-        int[][] embedded = new int[height][width];
+        int[][] embedded = cover.clone();
 
         int index = 0;
 
-        for(int i=0; i<Math.max(Math.min(height, width)/2, 1); ++i)
+        for(int i=0; index < message.length; ++i)
         {
             for(int x=i; x<width-i; ++x)
-                embedded[i][x] = index < message.length ?
-                    embedInLSB(cover[i][x], message[index++]) :
-                    cover[i][x];
+                if(index < message.length)
+                    embedded[i][x] = embedInLSB(cover[i][x], message[index++]);
     
-            System.out.println("1. " + index);
-
             for(int y=i+1; y<height-i; ++y)
-                embedded[y][width-i - 1] = index < message.length ?
-                    embedInLSB(cover[y][width-i - 1], message[index++]) :
-                    cover[y][width-i - 1];
+                if(index < message.length)
+                    embedded[y][width-i - 1] = embedInLSB(cover[y][width-i - 1], message[index++]);
     
-            System.out.println("2. " + index);
-
             for(int x=width-i-2; x>=i; --x)
-                embedded[height-i-1][x] = index < message.length ?
-                    embedInLSB(cover[height-i-1][x], message[index++]) :
-                    cover[height-i-1][x];
+                if(index < message.length)
+                    embedded[height-i-1][x] = embedInLSB(cover[height-i-1][x], message[index++]);
             
-            System.out.println("3. " + index);
-
             for(int y=height-i-2; y>=i+1; --y)
-                embedded[y][i] = index < message.length ?
-                    embedInLSB(cover[y][i], message[index++]) :
-                    cover[y][i];
-            
-            System.out.println("4. " + index);
+                if(index < message.length)
+                    embedded[y][i] = embedInLSB(cover[y][i], message[index++]);
         }
 
         return embedded;
@@ -241,22 +229,26 @@ public class Steganography
         int height = hidden.length;
         int width = hidden[0].length;
 
-        boolean[] array = new boolean[height*width + 2*Integer.SIZE];
+        boolean[] array = new boolean[height*width];
         int index = 0;
 
-        for(int i=0; i<Math.max(Math.min(height, width)/2, 1); ++i)
+        for(int i=0; index < array.length; ++i)
         {
             for(int x=i; x<width-i; ++x)
-                array[index++] = getLSB(hidden[i][x]);
+                if(index < array.length)
+                    array[index++] = getLSB(hidden[i][x]);
 
             for(int y=i+1; y<height-i; ++y)
-                array[index++] = getLSB(hidden[y][width-i-1]);
+                if(index < array.length)
+                    array[index++] = getLSB(hidden[y][width-i-1]);
 
             for(int x=width-i-2; x>=i; --x)
-                array[index++] = getLSB(hidden[height-i-1][x]);
+                if(index < array.length)
+                    array[index++] = getLSB(hidden[height-i-1][x]);
 
             for(int y=height-i-2; y>=i+1; --y)
-                array[index++] = getLSB(hidden[y][i]);
+                if(index < array.length)
+                    array[index++] = getLSB(hidden[y][i]);
         }
 
         return array;

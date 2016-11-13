@@ -147,10 +147,10 @@ public final class ImageMessage
 
     /**
      * Converts grayscale image to packed RGB image.
-     * @param channels a HxW float array
+     * @param gray a HxW int array
      * @return a HxW int array
      * @see #decode
-     * @see #getRGB(float)
+     * @see #getRGB(int)
      */
     public static int[][] toRGB(int[][] gray)
     {

@@ -4,23 +4,21 @@ public class MainStrings {
 
     public static void main(String[] args) {
         // some basic tests
-        /*testStringConversion("\01");
         testStringConversion("bla bla asdf");
         testStringConversion("bla bla asfg 54%%^&&& 33 asdf");
         testStringConversion("bla bla asfg 54%%^&&& 33 asdfasdf 123k");
         testIntToBitArray(10);
-        testIntToBitArray(8);*/
+        testIntToBitArray(8);
 
         //TESTING PART 2
 
         // first test case
-
-        /*String coverName = "AdeleBlochBauer-hidden";
+        String coverName = "AdeleBlochBauer-hidden";
 
         // A cover with a hidden image
         int [][] coverWithSecret =  Helper.read("images/AdeleBlochBauer/" + coverName + ".png");
 
-        testRevealText(coverWithSecret);*/
+        testRevealText(coverWithSecret);
 
         // complete process
 
@@ -37,9 +35,7 @@ public class MainStrings {
     public static void testStringConversion(String message) {
         System.out.println("Message: " + message);
         boolean[] encode = TextMessage.stringToBitArray(message);
-        //for(boolean b : encode)
-          //  System.out.print((b == true ? 1 : 0) + " ");
-        //System.out.println();
+        // System.out.println("Encode: " + encode);
         String decode = TextMessage.bitArrayToString(encode);
         System.out.println("Decode:  " + decode);
     }

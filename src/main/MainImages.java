@@ -8,16 +8,15 @@ public class MainImages {
         // first test case
         String coverName = "TheStarryNight-hidden";
 
-
         // A cover with a hidden image
-        /*int [][] coverWithSecret =  Helper.read("images/TheStarryNight/" + coverName + ".png");
+        int [][] coverWithSecret =  Helper.read("images/TheStarryNight/" + coverName + ".png");
 
-        testRevealImage(coverWithSecret);*/
+        testRevealImage(coverWithSecret);
 
         // testing the complete process
         // prepare cover
 
-        /*coverName = "TheStarryNight";
+        coverName = "TheStarryNight";
 
         int [][] cover  =  Helper.read("images/TheStarryNight/" + coverName + ".png");
 
@@ -26,16 +25,14 @@ public class MainImages {
         int[][] message  = Helper.read("images/TheStarryNight/" + messageName  + ".png");
 
 
-        testHideImage(cover, message);*/
+        testHideImage(cover, message);
 
         // second test case
 
         String name = "tiles-large";
-//        int [][] cover = Helper.read("/home/loris/Pictures/pp3.png");
-        int [][] cover = Helper.read("images/" + name + ".png");
+        cover = Helper.read("images/" + name + ".png");
 
-        int [][] message = Helper.read("/home/loris/Pictures/pp2.png");
-//        int [][] message = Helper.read("images/mickey-mouse.png");
+        message = Helper.read("images/mickey-mouse.png");
 
         testHideImage(cover, message);
 
@@ -53,8 +50,8 @@ public class MainImages {
         Helper.show(message, "Message");
 
         int[][] gray = ImageMessage.toGray(message);
-    
-        boolean[][] bw = ImageMessage.toBW(gray, 64);
+
+        boolean[][] bw = ImageMessage.toBW(gray, 240);
         Helper.show(ImageMessage.toRGB(bw), "Black and white message");
 
         int[][] hidden = Steganography.embedBWImage(cover, bw);

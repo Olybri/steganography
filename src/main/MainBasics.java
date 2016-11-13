@@ -10,7 +10,7 @@ public final class MainBasics {
 
         // TESTING Image manipulation tools
 
-        int[][]image = Helper.read("images/tiles-large.png");
+        int[][]image = Helper.read("images/mickey-mouse.png");
         testImageConversion(image);
     }
 
@@ -19,9 +19,7 @@ public final class MainBasics {
 
         int[][] gray = ImageMessage.toGray(image);
 
-        Helper.show(gray, "Gray image");
-
-        boolean[][] bw = ImageMessage.toBW(gray, 128);
+        boolean[][] bw = ImageMessage.toBW(gray, 240);
 
         Helper.show(ImageMessage.toRGB(bw), "Black and white image");
     }

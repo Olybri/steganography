@@ -70,7 +70,7 @@ public final class ImageMessage
      */
     public static boolean getBW(int gray, int threshold)
     {
-        return gray > threshold;
+        return gray >= threshold;
     }
 
     /**
@@ -140,7 +140,7 @@ public final class ImageMessage
 
         for(int y=0; y<height; ++y)
             for(int x=0; x<width; ++x)
-                grayImage[y][x] = getRGB(getGray(image[y][x]));
+                grayImage[y][x] = getGray(image[y][x]);
 
         return grayImage;
     }
@@ -181,7 +181,7 @@ public final class ImageMessage
 
         for(int y=0; y<height; ++y)
             for(int x=0; x<width; ++x)
-                bwImage[y][x] = getBW(getGray(gray[y][x]), threshold);
+                bwImage[y][x] = getBW(gray[y][x], threshold);
 
         return bwImage;
     }

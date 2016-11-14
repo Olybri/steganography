@@ -57,20 +57,17 @@ public final class ImageMessage
      */
     public static int getGray(int rgb)
     {
-        return
-            (clampColor(getRed(rgb)) +
-            clampColor(getGreen(rgb)) +
-            clampColor(getBlue(rgb))) / 3;
+        return (getRed(rgb) + getGreen(rgb) + getBlue(rgb)) / 3;
     }
 
     /**
      * @param gray an integer between 0 and 255
-     * @param threshold
+     * @param threshold a positive integer
      * @return true if gray is greater or equal to threshold, false otherwise
      */
     public static boolean getBW(int gray, int threshold)
     {
-        return gray >= threshold;
+        return clampColor(gray) >= threshold;
     }
 
     /**
@@ -79,8 +76,12 @@ public final class ImageMessage
      */
     private static int clampColor(int value)
     {
-        value = (value > 0xFF ? 0xFF : value);
-        value = (value < 0 ? 0 : value);
+        if(value > 0xFF)
+            return 0xFF;
+        
+        if(value < 0)
+            return 0;
+        
         return value;
     }
 
@@ -128,11 +129,12 @@ public final class ImageMessage
      * Converts packed RGB image to grayscale image.
      * @param image a HxW int array
      * @return a HxW int array
-     * @see #encode
      * @see #getGray
      */
     public static int[][] toGray(int[][] image)
     {
+        assert Utils.isImage(image) : "Not a valid image";
+        
         int height = image.length;
         int width = image[0].length;
 
@@ -149,11 +151,12 @@ public final class ImageMessage
      * Converts grayscale image to packed RGB image.
      * @param gray a HxW int array
      * @return a HxW int array
-     * @see #decode
      * @see #getRGB(int)
      */
     public static int[][] toRGB(int[][] gray)
     {
+        assert Utils.isImage(gray) : "Not a valid image";
+        
         int height = gray.length;
         int width = gray[0].length;
 
@@ -174,6 +177,8 @@ public final class ImageMessage
      */
     public static boolean[][] toBW(int[][] gray, int threshold)
     {
+        assert Utils.isImage(gray) : "Not a valid image";
+        
         int height = gray.length;
         int width = gray[0].length;
 
@@ -193,6 +198,8 @@ public final class ImageMessage
      */
     public static int[][] toRGB(boolean[][] image)
     {
+        assert Utils.isImage(image) : "Not a valid image";
+        
         int height = image.length;
         int width = image[0].length;
 
@@ -219,6 +226,8 @@ public final class ImageMessage
 
     public static boolean[] bwImageToBitArray(boolean[][] bwImage)
     {
+        assert Utils.isImage(bwImage) : "Not a valid image";
+        
         int height = bwImage.length;
         int width = bwImage[0].length;
 
@@ -244,6 +253,8 @@ public final class ImageMessage
      */
     public static boolean[][] bitArrayToImage(boolean[] bitArray)
     {
+        assert bitArray.length > 2 * Integer.SIZE : "Not a valid image";
+                
         int height = 0;
         for(int i=0; i<Integer.SIZE; ++i)
             height = (height << 1) + (bitArray[Integer.SIZE-1-i] ? 1 : 0);

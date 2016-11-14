@@ -44,6 +44,8 @@ public class Steganography
      */
     public static int[][] embedBWImage(int[][] cover, boolean[][] message)
     {
+        assert Utils.isImage(cover) : "Not a valid image";
+        
         int height = cover.length;
         int width = cover[0].length;
 
@@ -66,6 +68,8 @@ public class Steganography
      */
     public static boolean[][] revealBWImage(int[][] cover)
     {
+        assert Utils.isImage(cover) : "Not a valid image";
+        
         boolean[][] message = new boolean[cover.length][cover[0].length];
 
         for(int y=0; y<message.length; ++y)
@@ -90,6 +94,8 @@ public class Steganography
      */
     public static int[][] embedBitArray(int[][] cover, boolean[] message)
     {
+        assert Utils.isImage(cover) : "Not a valid image";
+        
         int height = cover.length;
         int width = cover[0].length;
 
@@ -112,6 +118,8 @@ public class Steganography
      */
     public static boolean[] revealBitArray(int[][] cover)
     {
+        assert Utils.isImage(cover) : "Not a valid image";
+        
         int height = cover.length;
         int width = cover[0].length;
 
@@ -189,6 +197,7 @@ public class Steganography
     public static int[][] embedSpiralBitArray(int[][] cover, boolean[] message)
     {
         assert Utils.isCoverLargeEnough(cover, message) : "Message is too big for cover";
+        assert Utils.isImage(cover) : "Not a valid image";
 
         int height = cover.length;
         int width = cover[0].length;
@@ -226,6 +235,8 @@ public class Steganography
      */
     public static boolean[] revealSpiralBitArray(int[][] hidden)
     {
+        assert Utils.isImage(hidden) : "Not a valid image";
+        
         int height = hidden.length;
         int width = hidden[0].length;
 
